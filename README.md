@@ -1,4 +1,4 @@
-# Primer commit
+# AppLogin
 
 Una aplicación full stack sencilla implementando un sistema de sesiones 🔐
 La aplicación se aloja en el puerto 80 de localhost.
