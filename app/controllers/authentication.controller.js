@@ -1,7 +1,6 @@
 import bcryptjs from "bcryptjs";
 import debug from "../utils/debug.js"
 import dotenv from "dotenv";
-import baseDeDatos from "../../database.json" with { type: 'json' };
 import fs from "node:fs";
 import path from "node:path";
 import url from "node:url";
@@ -11,8 +10,13 @@ dotenv.config();
 const dirname = url.fileURLToPath(import.meta.url);
 const ruta = path.join(dirname, "../../../database.json");
 
+if (!fs.existsSync(ruta)) {
+  fs.writeFileSync(ruta, "[]");
+}
+
 debug("Base de datos localizada en " + ruta);
 
+const baseDeDatos = JSON.parse(fs.readFileSync(ruta));
 export const usuarios = baseDeDatos;
 
 async function login(req, res) {
